@@ -1,7 +1,6 @@
 import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.notNullValue;
 
 public class LoginCourierTest extends BaseTest {
