@@ -4,9 +4,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 
 public class BaseTest {
+    static RequestSpecification specification;
     @BeforeClass
-    public void setUp() {
-        RequestSpecification specification = RestAssured.given();
+    public static void setUp() {
+        specification = RestAssured.given();
         specification.baseUri("https://qa-scooter.praktikum-services.ru");
         specification.header("Content-type", "application/json");
     }
