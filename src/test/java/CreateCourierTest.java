@@ -1,5 +1,4 @@
-import api.CourierResponse;
-import model.Courier;
+import io.restassured.RestAssured;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -16,7 +15,7 @@ public class CreateCourierTest extends BaseTest {
     @BeforeClass
     public static void createCourier() {
         Courier courier = new Courier(loginForClassConfig, passwordForClassConfig, courierName);
-        given()
+        given().spec(specification)
                 .body(courier)
                 .when()
                 .post("/api/v1/courier")
@@ -28,7 +27,7 @@ public class CreateCourierTest extends BaseTest {
     @Test
     public void createWithoutAttr() {
         Courier courier = new Courier();
-        given()
+        given().spec(specification)
                 .body(courier)
                 .when()
                 .post("/api/v1/courier")
@@ -40,7 +39,7 @@ public class CreateCourierTest extends BaseTest {
     @Test
     public void createRepeatCourier() {
         Courier courier = new Courier(loginForClassConfig, passwordForClassConfig, courierName);
-        given()
+        given().spec(specification)
                 .body(courier)
                 .when()
                 .post("/api/v1/courier")
@@ -52,12 +51,12 @@ public class CreateCourierTest extends BaseTest {
     @AfterClass
     public static void deleteCourier() {
         Courier courier = new Courier(loginForClassConfig, passwordForClassConfig);
-        CourierResponse courierResponse = given()
+        CourierResponse courierResponse = given().spec(specification)
                 .body(courier)
                 .post("/api/v1/courier/login")
                 .body().as(CourierResponse.class);
 
-        given()
+        given().spec(specification)
                 .when()
                 .delete(String.format("/api/v1/courier/%s", courierResponse.getId()))
                 .then()

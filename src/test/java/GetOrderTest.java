@@ -1,4 +1,3 @@
-import api.OrderList;
 import io.restassured.response.Response;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
@@ -10,7 +9,7 @@ public class GetOrderTest extends BaseTest {
 
     @Test
     public void getOrderList() {
-        Response response = given()
+        Response response = given().spec(specification)
                 .get("/api/v1/orders");
         response.then().assertThat().statusCode(200);
         OrderList orderList =

@@ -1,4 +1,3 @@
-import model.Courier;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
@@ -10,7 +9,7 @@ public class LoginCourierTest extends BaseTest {
     * Поэтому сделала проверку на 400 ошибку*/
     @Test
     public void authCourierWithoutAttr() {
-        given()
+        given().spec(specification)
                 .body(new Courier("ksyusha", ""))
                 .when()
                 .post("/api/v1/courier/login")
@@ -19,7 +18,7 @@ public class LoginCourierTest extends BaseTest {
 
     @Test
     public void authCourierWithValidData() {
-        given()
+        given().spec(specification)
                 .body(new Courier("ksyusha", "12345"))
                 .when()
                 .post("/api/v1/courier/login")
@@ -30,7 +29,7 @@ public class LoginCourierTest extends BaseTest {
 
     @Test
     public void authCourierWithNotValidData() {
-        given()
+        given().spec(specification)
                 .body(new Courier("log", "passw"))
                 .when()
                 .post("/api/v1/courier/login")
@@ -41,7 +40,7 @@ public class LoginCourierTest extends BaseTest {
     @Test
     public void authNotExistingCourier() {
         Courier courier = new Courier("NotExisting","NotExisting");
-        given()
+        given().spec(specification)
                 .body(courier)
                 .when()
                 .post("/api/v1/courier/login")

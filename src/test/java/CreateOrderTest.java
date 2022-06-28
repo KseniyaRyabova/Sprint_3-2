@@ -1,4 +1,3 @@
-import model.OrderRequest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -28,13 +27,13 @@ public class CreateOrderTest extends BaseTest{
                         "comment", new String[]{"GRAY"})},
                 {new OrderRequest("firstName", "Naruto", "Konoha, 142 apt.",
                         4, "+7 800 355 35 35", 4, "2020-06-06",
-                        "comment")},
+                        "comment", null)},
         };
     }
 
     @Test()
     public void createOrderWithColor() {
-        given()
+        given().spec(specification)
                 .body(orderRequest)
                 .when()
                 .post("/api/v1/orders")
