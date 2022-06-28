@@ -1,45 +1,32 @@
-import java.util.List;
+package model;
 
-public class Order {
-    private int id;
-    private int courierId;
+public class OrderRequest {
     private String firstName;
     private String lastName;
     private String address;
-    private String metroStation;
+    private int metroStation;
     private String phone;
     private int rentTime;
     private String deliveryDate;
-    private int track;
-    private List<String> color;
     private String comment;
-    private String createdAt;
-    private String updatedAt;
-    private int status;
+    private String[] color;
 
-    public List<String> getColor() {
-        return color;
-    }
-
-    public void setColor(List<String> color) {
+    public OrderRequest(String firstName, String lastName, String address, int metroStation, String phone, int rentTime, String deliveryDate, String comment, String[] color) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.metroStation = metroStation;
+        this.phone = phone;
+        this.rentTime = rentTime;
+        this.deliveryDate = deliveryDate;
+        this.comment = comment;
         this.color = color;
     }
 
-    public int getId() {
-        return id;
+    public void setColor(String[] color) {
+        this.color = color;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getCourierId() {
-        return courierId;
-    }
-
-    public void setCourierId(int courierId) {
-        this.courierId = courierId;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -65,11 +52,11 @@ public class Order {
         this.address = address;
     }
 
-    public String getMetroStation() {
+    public int getMetroStation() {
         return metroStation;
     }
 
-    public void setMetroStation(String metroStation) {
+    public void setMetroStation(int metroStation) {
         this.metroStation = metroStation;
     }
 
@@ -97,44 +84,11 @@ public class Order {
         this.deliveryDate = deliveryDate;
     }
 
-    public int getTrack() {
-        return track;
-    }
-
-    public void setTrack(int track) {
-        this.track = track;
-    }
-
-
     public String getComment() {
         return comment;
     }
 
     public void setComment(String comment) {
         this.comment = comment;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
     }
 }
