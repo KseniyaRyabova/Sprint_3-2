@@ -1,3 +1,4 @@
+import model.OrderRequest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -34,7 +35,6 @@ public class CreateOrderTest extends BaseTest{
     @Test()
     public void createOrderWithColor() {
         given()
-                .header("Content-type", "application/json")
                 .body(orderRequest)
                 .when()
                 .post("/api/v1/orders")

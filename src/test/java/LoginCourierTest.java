@@ -1,3 +1,4 @@
+import model.Courier;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
@@ -10,7 +11,6 @@ public class LoginCourierTest extends BaseTest {
     @Test
     public void authCourierWithoutAttr() {
         given()
-                .header("Content-type", "application/json")
                 .body(new Courier("ksyusha", ""))
                 .when()
                 .post("/api/v1/courier/login")
@@ -20,7 +20,6 @@ public class LoginCourierTest extends BaseTest {
     @Test
     public void authCourierWithValidData() {
         given()
-                .header("Content-type", "application/json")
                 .body(new Courier("ksyusha", "12345"))
                 .when()
                 .post("/api/v1/courier/login")
@@ -32,7 +31,6 @@ public class LoginCourierTest extends BaseTest {
     @Test
     public void authCourierWithNotValidData() {
         given()
-                .header("Content-type", "application/json")
                 .body(new Courier("log", "passw"))
                 .when()
                 .post("/api/v1/courier/login")
@@ -44,7 +42,6 @@ public class LoginCourierTest extends BaseTest {
     public void authNotExistingCourier() {
         Courier courier = new Courier("NotExisting","NotExisting");
         given()
-                .header("Content-type", "application/json")
                 .body(courier)
                 .when()
                 .post("/api/v1/courier/login")
