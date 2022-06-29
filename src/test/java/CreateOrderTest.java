@@ -1,8 +1,7 @@
+import dto.OrderRequest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-
-import java.util.List;
 
 import static io.restassured.RestAssured.filters;
 import static io.restassured.RestAssured.given;

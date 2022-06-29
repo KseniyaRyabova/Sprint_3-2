@@ -1,3 +1,4 @@
+import dto.Courier;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
