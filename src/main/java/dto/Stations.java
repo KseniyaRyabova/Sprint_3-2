@@ -1,3 +1,5 @@
+package dto;
+
 public class Stations {
     private String name;
     private String number;

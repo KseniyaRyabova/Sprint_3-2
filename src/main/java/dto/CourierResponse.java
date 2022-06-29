@@ -1,3 +1,5 @@
+package dto;
+
 public class CourierResponse {
     private int id;
 
