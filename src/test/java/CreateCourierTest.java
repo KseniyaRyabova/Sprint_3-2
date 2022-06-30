@@ -4,6 +4,9 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -24,6 +27,25 @@ public class CreateCourierTest extends BaseTest {
                 .then()
                 .statusCode(201)
                 .body("ok", equalTo(true));
+    }
+
+    @AfterClass
+    public static void deleteCourier() {
+        List<Courier> couriers = Arrays.asList(new Courier(loginForClassConfig, passwordForClassConfig),
+                new Courier(loginForClassConfig2, passwordForClassConfig));
+
+        for (Courier courier : couriers) {
+            CourierResponse courierResponse = given().spec(specification)
+                    .body(courier)
+                    .post("/api/v1/courier/login")
+                    .body().as(CourierResponse.class);
+            given().spec(specification)
+                    .when()
+                    .delete(String.format("/api/v1/courier/%s", courierResponse.getId()))
+                    .then()
+                    .statusCode(200)
+                    .body("ok", equalTo(true));
+        }
     }
 
     //создание курьера без одного из полей
@@ -62,35 +84,5 @@ public class CreateCourierTest extends BaseTest {
                 .then()
                 .statusCode(409)
                 .body("message", equalTo("Этот логин уже используется. Попробуйте другой."));
-    }
-
-    @AfterClass
-    public static void deleteCourier() {
-        Courier courier = new Courier(loginForClassConfig, passwordForClassConfig);
-        Courier courier2 = new Courier(loginForClassConfig2, passwordForClassConfig);
-
-        CourierResponse courierResponse1 = given().spec(specification)
-                .body(courier)
-                .post("/api/v1/courier/login")
-                .body().as(CourierResponse.class);
-
-        CourierResponse courierResponse2 = given().spec(specification)
-                .body(courier2)
-                .post("/api/v1/courier/login")
-                .body().as(CourierResponse.class);
-
-        given().spec(specification)
-                .when()
-                .delete(String.format("/api/v1/courier/%s", courierResponse1.getId()))
-                .then()
-                .statusCode(200)
-                .body("ok", equalTo(true));
-
-        given().spec(specification)
-                .when()
-                .delete(String.format("/api/v1/courier/%s", courierResponse2.getId()))
-                .then()
-                .statusCode(200)
-                .body("ok", equalTo(true));
     }
 }
